@@ -1,0 +1,261 @@
+/* 全体設定 */
+body {
+	background: linear-gradient(to bottom, #000033, #1a2a6c);
+	/* 深い青から紫へのグラデーション */
+	color: #e0e0e0;
+	font-family: 'Hiragino Sans', sans-serif;
+	text-align: center;
+	margin: 0;
+	padding: 0;
+	min-height: 100vh;
+	/* 画面全体を覆う */
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	overflow-x: hidden;
+	/* 横スクロール禁止 */
+	position: relative;
+}
+
+/* お星様 */
+.stars {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	pointer-events: none;
+	z-index: 1;
+	/* 背景として一番下に配置 */
+	/* 白い小さな丸をたくさん並べて星に見せる設定 */
+	background-image:
+		radial-gradient(2px 2px at 20px 30px, #eee, rgba(0, 0, 0, 0)),
+		radial-gradient(2px 2px at 40px 70px, #fff, rgba(0, 0, 0, 0)),
+		radial-gradient(2px 2px at 50px 160px, #ddd, rgba(0, 0, 0, 0)),
+		radial-gradient(2px 2px at 90px 40px, #fff, rgba(0, 0, 0, 0)),
+		radial-gradient(2px 2px at 130px 80px, #fff, rgba(0, 0, 0, 0));
+	background-repeat: repeat;
+	background-size: 200px 200px;
+	/* この範囲でお星様を繰り返す */
+	animation: twinkle 5s infinite alternate;
+}
+
+/* 星の瞬きアニメーション */
+@keyframes twinkle {
+	0% {
+		opacity: 0.8;
+	}
+
+	50% {
+		opacity: 0.4;
+	}
+
+	100% {
+		opacity: 0.8;
+	}
+}
+
+h1 {
+	color: #ffe082;
+	/* 優しい黄色のタイトル */
+	font-size: 3.5em;
+	/* 大きめ */
+	margin-bottom: 30px;
+	text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.container {
+	background-color: rgba(255, 255, 255, 0.1);
+	/* 少し透明な白い背景 */
+	padding: 40px;
+	border-radius: 20px;
+	max-width: 600px;
+	width: 90%;
+	/* フレキシブル */
+	box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
+	position: relative;
+	/* 星の上に表示 */
+	z-index: 10;
+	/* 星より手前に */
+}
+
+label {
+	display: block;
+	font-size: 1.5em;
+	margin-bottom: 15px;
+	color: #b3e5fc;
+	/* 明るい水色 */
+}
+
+input[type="text"] {
+	padding: 15px;
+	font-size: 1.4em;
+	width: calc(100% - 30px);
+	/* フレキシブル */
+	margin-bottom: 25px;
+	border: none;
+	border-radius: 10px;
+	background-color: rgba(255, 255, 255, 0.9);
+	color: #333;
+}
+
+.story-selection {
+	display: flex;
+	flex-wrap: wrap;
+	/* 小さい画面で折り返す */
+	justify-content: center;
+	gap: 15px;
+	/* ボタン間のスペース */
+	margin-bottom: 30px;
+}
+
+.story-selection label {
+	display: block;
+	margin: 0;
+	padding: 0, 10px;
+	width: auto;
+}
+
+.story-button {
+	background-color: #81d4fa;
+	/* 青みがかったボタン */
+	color: #000033;
+	border: none;
+	padding: 15px 30px;
+	border-radius: 25px;
+	font-size: 1.3em;
+	cursor: pointer;
+	transition: background-color 0.3s ease, transform 0.2s ease;
+	box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.story-button:hover {
+	background-color: #4fc3f7;
+	/* ホバーで少し濃く */
+	transform: translateY(-3px);
+	/* 少し浮き上がる */
+}
+
+input[type="radio"] {
+	display: none;
+	/* ラジオボタン自体は非表示 */
+}
+
+input[type="radio"]:checked+.story-button {
+	background-color: #ffeb3b;
+	/* 選択されたボタンは黄色に */
+	color: #333;
+	box-shadow: 0 0 15px #ffeb3b, 0 5px 20px rgba(0, 0, 0, 0.3);
+	transform: scale(1.05);
+}
+
+button[type="submit"] {
+	background-color: #aed581;
+	/* 緑系のボタン */
+	color: #000033;
+	border: none;
+	padding: 18px 40px;
+	border-radius: 30px;
+	font-size: 1.8em;
+	cursor: pointer;
+	transition: background-color 0.3s ease, transform 0.2s ease;
+	box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+button[type="submit"]:hover {
+	background-color: #8bc34a;
+	transform: translateY(-5px);
+}
+
+.error-message {
+	color: #ffccbc;
+	/* 薄い赤 */
+	font-size: 1.2em;
+	margin-top: -15px;
+	margin-bottom: 20px;
+}
+
+.honorific-selection {
+	margin-bottom: 20px;
+	display: flex;
+	justify-content: center;
+	gap: 20px;
+}
+
+.honorific-selection label {
+	background: rgba(255, 255, 255, 0.2);
+	padding: 10px 20px;
+	border-radius: 10px;
+	cursor: pointer;
+}
+
+/* ラジオボタンがチェックされたら色を変える */
+.honorific-selection input[type="radio"]:checked+label {
+	background: #ffeb3b;
+	color: #000033;
+	border-color: #ffeb3b;
+	box-shadow: 0 0 10px #ffeb3b;
+}
+
+.image-box {
+	width: 100%;
+	margin-bottom: 20px;
+	text-align: center;
+}
+
+.image-box img {
+	max-width: 100%;
+	/* 画面からはみ出さない */
+	height: auto;
+	/* 比率を保つ */
+	border-radius: 15px;
+	/* 角を丸くして優しく */
+	box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+	/* 少し浮かせて絵本らしく */
+	border: 3px solid rgba(255, 255, 255, 0.3);
+}
+
+
+/* レスポンシブデザイン */
+@media (max-width: 768px) {
+	h1 {
+		font-size: 1.9em;
+	}
+
+	.container {
+		padding: 30px;
+		width: 95%;
+	}
+
+	input[type="text"],
+	.story-button {
+		font-size: 1.2em;
+		padding: 12px 20px;
+	}
+
+	button[type="submit"] {
+		font-size: 1.5em;
+		padding: 15px 30px;
+	}
+
+	.story-selection {
+		flex-direction: column;
+	}
+
+	/* 小さい画面では縦並び */
+	
+		.honorific-selection {
+			gap: 10px;
+		}
+	
+		.honorific-selection label {
+			padding: 15px 0;
+			/* 高さを出してタップしやすく */
+			flex: 1;
+			/* 横幅を均等に広げる */
+			font-size: 1.1rem;
+			text-align: center;
+		}
+	
+}
