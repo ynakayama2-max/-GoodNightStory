@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>おやすみおはなしのじかん</title>
+	<link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+
+<body>
+	<div class="stars"></div>
+	<div class="container">
+		<h1>おやすみおはなしのじかん</h1>
+		<p style="font-size: 1.2em; color: #bbdefb;">きみのなまえで、おはなしがはじまるよ！</p>
+
+		<p th:if="${error}" class="error-message" th:text="${error}"></p>
+
+		<form th:action="@{/read}" method="post">
+			
+			<label>おなまえと よびかた</label>
+			<input type="text" name="userName" required placeholder="なまえ">
+			
+			<div class="honorific-selection">
+			    <input type="radio" id="kun" name="honorific" value="くん" checked>
+			    <label for="kun">くん</label>
+			    <input type="radio" id="chan" name="honorific" value="ちゃん">
+			    <label for="chan">ちゃん</label>
+			<input type="radio" id="nashi" name="honorific" value="">
+					    <label for="nashi">なし</label>
+
+			</div>
+
+			<label>どのおはなしがいいかな？</label>
+			<div class="story-selection">
+				<div th:each="title, stat : ${storyTitles}">
+					<input type="radio" th:id="${'story' + (stat.index + 1)}" name="storyId"
+						th:value="${stat.index + 1}" required>
+					<label th:for="${'story' + (stat.index + 1)}" class="story-button" th:text="${title}"></label>
+				</div>
+			</div>
+
+			<button type="submit">このおはなしをよむ！</button>
+		</form>
+	</div>
+</body>
+
+</html>
